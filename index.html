@@ -6,7 +6,7 @@
     <meta name="robots" content="index,follow" />
     <meta
       name="description"
-      content="Política de privacidad de Nap-less: biometría del dispositivo, cámara y almacenamiento local."
+      content="Política de privacidad de Nap-less: biometría del dispositivo, cámara, micrófono, datos de salud y almacenamiento local."
     />
     <title>Política de privacidad · Nap-less</title>
     <style>
@@ -59,15 +59,40 @@
         <a class="lang" href="en.html">English</a>
         <div class="brand">Nap-less</div>
         <h1>Política de privacidad</h1>
-        <p class="updated">Última actualización: 13 de octubre de 2026</p>
+        <p class="updated">Última actualización: 4 de noviembre de 2026</p>
         <p class="owner">Responsable del proyecto y contacto de privacidad:
           <a href="mailto:ACAP1.0@OUTLOOK.COM">ACAP1.0@OUTLOOK.COM</a> · Estados Unidos
         </p>
       </header>
 
       <aside class="notice">
-        Esta política resume cómo funciona la versión actual de Nap-less. Es información general y no constituye asesoramiento legal.
+        Esta política describe qué datos trata Nap-less, dónde se guardan y qué servicios de
+        terceros intervienen. Es información general y no constituye asesoramiento legal.
       </aside>
+
+      <section>
+        <h2>Resumen</h2>
+        <p>
+          Nap-less no tiene servidores propios. Tu cuenta, tus alarmas, tu diario de sueño, tus
+          grabaciones y tus mediciones de pulso se guardan en tu dispositivo. Los únicos datos que
+          salen del teléfono son los informes de fallos que envía Firebase Crashlytics, las
+          comprobaciones de actualizaciones de Expo y el sitio de PayPal si decides donar.
+        </p>
+      </section>
+
+      <section>
+        <h2>Cuenta local</h2>
+        <p>
+          Para usar la app creas una cuenta que se guarda únicamente en tu dispositivo: correo
+          electrónico, un identificador interno y una huella criptográfica (hash) de tu
+          contraseña. No se envía ningún correo ni se crea una cuenta en un servidor. El código de
+          verificación se genera y se comprueba en el propio teléfono.
+        </p>
+        <p>
+          El correo electrónico solo sirve para identificar la cuenta en el dispositivo. No se
+          usa para marketing ni se comparte con terceros.
+        </p>
+      </section>
 
       <section>
         <h2>Biometría del dispositivo</h2>
@@ -84,55 +109,146 @@
       </section>
 
       <section>
-        <h2>Cámara y fotos del reto</h2>
+        <h2>Cámara: foto del reto y medición de pulso</h2>
         <p>
-          Para demostrar que cumples el reto elegido, Nap-less te pide una foto con la cámara.
-          La foto se analiza en tu dispositivo, mediante ML Kit en Android y Vision en iOS, para
-          buscar señales visuales del reto (por ejemplo, un vaso o una postura). La foto no se
-          envía a nuestros servidores, no se guarda en la galería y se elimina del almacenamiento
-          temporal de la app después del análisis.
+          <strong>Foto del reto.</strong> Para demostrar que cumples el reto elegido, Nap-less te
+          pide una foto con la cámara. La foto se analiza en tu dispositivo, mediante ML Kit en
+          Android y Vision en iOS, para buscar señales visuales del reto (por ejemplo, un vaso o
+          una postura). La foto no se envía a nuestros servidores, no se guarda en la galería y se
+          elimina del almacenamiento temporal de la app después del análisis.
         </p>
         <p>
-          El resultado es una señal visual: no certifica que realizaras una acción ni que tomaras
-          un medicamento.
+          <strong>Medición de pulso (PPG).</strong> Si inicias una medición, la app usa la cámara
+          trasera y la linterna durante unos segundos para estimar tu pulso y la variabilidad del
+          ritmo cardíaco. Los fotogramas se procesan en el dispositivo y se descartan; solo se
+          guarda el resultado numérico en la base de datos cifrada descrita más abajo.
+        </p>
+        <p>
+          El resultado del reto es una señal visual: no certifica que realizaras una acción ni que
+          tomaras un medicamento.
+        </p>
+      </section>
+
+      <section>
+        <h2>Micrófono y registros de sueño</h2>
+        <p>
+          El seguimiento del sueño es una función opcional que activas manualmente. Mientras está
+          activo, la app mantiene el micrófono en escucha mediante un servicio en primer plano con
+          una notificación permanente, y solo conserva fragmentos de audio que superan ciertos
+          umbrales de sonido (por ejemplo, ronquidos, voz o tos).
+        </p>
+        <p>
+          Cada fragmento se cifra con AES-GCM y una clave guardada en el almacén de claves del
+          sistema, y se elimina automáticamente a las 24 horas. Puedes borrar una grabación
+          concreta desde la propia app en cualquier momento.
+        </p>
+        <p>
+          Ten en cuenta que el micrófono puede captar también sonidos de otras personas presentes
+          en la habitación. Activa esta función solo si todas las personas presentes lo saben.
+        </p>
+      </section>
+
+      <section>
+        <h2>Datos de salud y diario del sueño</h2>
+        <p>
+          Nap-less guarda en una base de datos cifrada (SQLCipher, con la clave en el
+          almacenamiento seguro del sistema) las sesiones de sueño, los eventos detectados
+          (ronquido, voz, tos, con su hora, duración y nivel de confianza), las mediciones de pulso
+          y variabilidad, y las entradas del diario: cafeína, alcohol, minutos de ejercicio y
+          estado de ánimo.
+        </p>
+        <p>
+          Estos datos se usan solo para mostrarte resúmenes y correlaciones dentro de la app. No
+          se envían a ningún servidor, no se comparten con terceros y no se usan para publicidad.
+          Nap-less no es un producto sanitario y esta información no sirve para diagnosticar ni
+          tratar ninguna enfermedad.
         </p>
       </section>
 
       <section>
         <h2>Permisos que solicita la app</h2>
         <ul>
-          <li><strong>Cámara:</strong> para tomar la foto del reto.</li>
-          <li><strong>Biometría / Face ID:</strong> para verificar tu identidad con el sistema.</li>
+          <li><strong>Cámara:</strong> para la foto del reto y la medición de pulso.</li>
+          <li><strong>Micrófono:</strong> solo si activas el seguimiento del sueño.</li>
           <li><strong>Notificaciones y alarmas exactas:</strong> para que la alarma suene a la hora elegida, incluso tras reiniciar el teléfono.</li>
-          <li><strong>Audio del dispositivo:</strong> solo si eliges un archivo de sonido propio como tono.</li>
-          <li><strong>Segundo plano, vibración y pantalla encendida:</strong> para mantener la alarma sonando.</li>
+          <li><strong>Biometría / Face ID:</strong> para verificar tu identidad con el sistema.</li>
+          <li><strong>Lectura de archivos de audio:</strong> solo si eliges un sonido propio como tono. Nap-less no accede a tus fotos ni a tus vídeos.</li>
+          <li><strong>Servicio en primer plano, vibración y pantalla encendida:</strong> para mantener la alarma y el seguimiento del sueño activos.</li>
+          <li><strong>Ignorar la optimización de batería:</strong> para que el sistema no detenga la alarma ni la grabación.</li>
+          <li><strong>Internet:</strong> para informes de fallos, comprobación de actualizaciones y el enlace de donación.</li>
         </ul>
       </section>
 
       <section>
-        <h2>Almacenamiento y cuentas</h2>
+        <h2>Servicios de terceros</h2>
         <p>
-          No necesitas crear una cuenta. Tus alarmas y preferencias (idioma, tema y tamaño de
-          texto) se guardan localmente en el dispositivo, y los ajustes de seguridad se guardan
-          con almacenamiento seguro del sistema. Nap-less no sube fotos ni datos biométricos a
-          servidores.
+          Nap-less no vende datos ni los comparte con anunciantes. Estos servicios pueden tratar
+          datos técnicos por su cuenta:
         </p>
+        <ul>
+          <li><strong>Firebase Crashlytics (Google):</strong> recibe informes cuando la app falla, junto con el modelo y la versión del sistema, la versión de la app y un identificador de instalación. No incluye tus grabaciones, tu diario ni tus mediciones.</li>
+          <li><strong>Expo / EAS Update:</strong> al comprobar actualizaciones, recibe datos técnicos como la dirección IP, la plataforma, la versión de la app y el canal de actualización.</li>
+          <li><strong>PayPal:</strong> si pulsas el botón de donación, se abre su sitio web en tu navegador. Nap-less no le envía datos tuyos, pero PayPal tratará tu dirección IP y los datos del pago según su propia política.</li>
+        </ul>
       </section>
 
       <section>
         <h2>Anuncios y seguimiento</h2>
         <p>
-          Nap-less no incluye publicidad, seguimiento publicitario ni herramientas de analítica
-          dentro de la app.
+          Nap-less no incluye publicidad ni analítica de comportamiento, no crea perfiles
+          publicitarios y no rastrea tu actividad en otras apps o sitios. El único componente de
+          diagnóstico es el servicio de fallos descrito arriba.
+        </p>
+      </section>
+
+      <section>
+        <h2>Conservación de los datos</h2>
+        <p>
+          Las grabaciones de audio se eliminan automáticamente a las 24 horas. El resto de datos
+          locales (cuenta, alarmas, ajustes, diario, eventos y mediciones) permanece en el
+          dispositivo hasta que lo borres desde la app o desinstales Nap-less.
         </p>
       </section>
 
       <section>
         <h2>Cómo borrar los datos</h2>
         <p>
-          Puedes quitar la configuración de biometría desde la app. Para eliminar también tus
-          alarmas y ajustes locales, borra los datos de Nap-less desde tu dispositivo o
-          desinstala la app.
+          Puedes borrar grabaciones concretas desde la pantalla de sueño y quitar la configuración
+          de biometría desde la app. Para eliminar la cuenta y todos los datos locales, borra los
+          datos de Nap-less desde los ajustes de tu dispositivo o desinstala la app.
+        </p>
+        <p>
+          Si necesitas ayuda para eliminar tus datos, escribe a
+          <a href="mailto:ACAP1.0@OUTLOOK.COM">ACAP1.0@OUTLOOK.COM</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Tus derechos</h2>
+        <p>
+          Como los datos se guardan en tu dispositivo, puedes ejercer el acceso, la rectificación,
+          la eliminación y la portabilidad directamente desde la app o borrando sus datos. Si
+          resides en el Espacio Económico Europeo, Reino Unido o California, también puedes
+          escribirnos para plantear una consulta o reclamación sobre privacidad.
+        </p>
+        <p>
+          Nap-less no vende ni comparte datos personales con fines publicitarios.
+        </p>
+      </section>
+
+      <section>
+        <h2>Menores</h2>
+        <p>
+          Nap-less no está dirigida a menores de 13 años y no recopila conscientemente datos de
+          menores. Si crees que se han guardado datos de un menor, escríbenos para eliminarlos.
+        </p>
+      </section>
+
+      <section>
+        <h2>Cambios en esta política</h2>
+        <p>
+          Si cambian las funciones o los servicios utilizados, actualizaremos esta página y la
+          fecha de la última modificación. Los cambios importantes se anunciarán dentro de la app.
         </p>
       </section>
 
@@ -141,7 +257,7 @@
         <p>
           Esta página pública se sirve mediante GitHub Pages. El alojamiento podría procesar información
           técnica de las solicitudes conforme a sus propias prácticas; Nap-less no recibe por ello
-                    fotos ni datos biométricos.
+          fotos ni datos biométricos.
         </p>
       </section>
 

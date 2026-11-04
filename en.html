@@ -6,7 +6,7 @@
     <meta name="robots" content="index,follow" />
     <meta
       name="description"
-      content="Nap-less privacy policy: device biometrics, camera and local storage."
+      content="Nap-less privacy policy: device biometrics, camera, microphone, health data and local storage."
     />
     <title>Privacy Policy · Nap-less</title>
     <style>
@@ -59,15 +59,40 @@
         <a class="lang" href="./">Español</a>
         <div class="brand">Nap-less</div>
         <h1>Privacy Policy</h1>
-        <p class="updated">Last updated: October 13, 2026</p>
+        <p class="updated">Last updated: November 4, 2026</p>
         <p class="owner">Project owner and privacy contact:
           <a href="mailto:ACAP1.0@OUTLOOK.COM">ACAP1.0@OUTLOOK.COM</a> · United States
         </p>
       </header>
 
       <aside class="notice">
-        This policy summarizes how the current version of Nap-less works. It is general information and does not constitute legal advice.
+        This policy explains what data Nap-less handles, where it is stored and which third-party
+        services are involved. It is general information and does not constitute legal advice.
       </aside>
+
+      <section>
+        <h2>Overview</h2>
+        <p>
+          Nap-less has no servers of its own. Your account, alarms, sleep diary, recordings and
+          pulse measurements stay on your device. The only data that leaves the phone is the crash
+          reports sent to Firebase Crashlytics, update checks with Expo and the PayPal site if you
+          choose to donate.
+        </p>
+      </section>
+
+      <section>
+        <h2>Local account</h2>
+        <p>
+          To use the app you create an account that is stored only on your device: email address,
+          an internal identifier and a cryptographic hash of your password. No email is sent and no
+          server account is created. The verification code is generated and checked on the phone
+          itself.
+        </p>
+        <p>
+          Your email address is used only to identify the account on the device. It is not used for
+          marketing and is not shared with third parties.
+        </p>
+      </section>
 
       <section>
         <h2>Device biometrics</h2>
@@ -84,53 +109,145 @@
       </section>
 
       <section>
-        <h2>Camera and challenge photos</h2>
+        <h2>Camera: challenge photo and pulse measurement</h2>
         <p>
-          To prove you completed the challenge you chose, Nap-less asks you to take a photo with
-          the camera. The photo is analyzed on your device, using ML Kit on Android and Vision on
-          iOS, to look for visual cues of the challenge (for example, a glass or a posture). The
-          photo is not sent to our servers, is not saved to your gallery, and is deleted from the
-          app's temporary storage after analysis.
+          <strong>Challenge photo.</strong> To prove you completed the challenge you chose,
+          Nap-less asks you to take a photo with the camera. The photo is analyzed on your device,
+          using ML Kit on Android and Vision on iOS, to look for visual cues of the challenge (for
+          example, a glass or a posture). The photo is not sent to our servers, is not saved to your
+          gallery, and is deleted from the app's temporary storage after analysis.
         </p>
         <p>
-          The result is a visual cue only: it does not certify that you performed an action or
-          took a medication.
+          <strong>Pulse measurement (PPG).</strong> If you start a measurement, the app uses the
+          rear camera and the flashlight for a few seconds to estimate your heart rate and heart
+          rate variability. Frames are processed on the device and discarded; only the numeric
+          result is stored in the encrypted database described below.
+        </p>
+        <p>
+          The challenge result is a visual cue only: it does not certify that you performed an
+          action or took a medication.
+        </p>
+      </section>
+
+      <section>
+        <h2>Microphone and sleep recordings</h2>
+        <p>
+          Sleep tracking is an optional feature you start manually. While it is active, the app
+          keeps the microphone listening through a foreground service with a permanent
+          notification, and it only keeps audio clips that exceed certain sound thresholds (for
+          example, snoring, speech or coughing).
+        </p>
+        <p>
+          Each clip is encrypted with AES-GCM using a key stored in the system keystore, and is
+          deleted automatically after 24 hours. You can delete any individual recording from inside
+          the app at any time.
+        </p>
+        <p>
+          Keep in mind that the microphone may also capture other people in the room. Enable this
+          feature only if everyone present is aware of it.
+        </p>
+      </section>
+
+      <section>
+        <h2>Health data and sleep diary</h2>
+        <p>
+          Nap-less stores in an encrypted database (SQLCipher, with the key in the system's secure
+          storage) your sleep sessions, detected events (snoring, speech, coughing, with time,
+          duration and confidence), pulse and variability measurements, and diary entries:
+          caffeine, alcohol, exercise minutes and mood.
+        </p>
+        <p>
+          This data is used only to show you summaries and correlations inside the app. It is not
+          sent to any server, not shared with third parties and not used for advertising. Nap-less
+          is not a medical product and this information is not intended to diagnose or treat any
+          condition.
         </p>
       </section>
 
       <section>
         <h2>Permissions the app requests</h2>
         <ul>
-          <li><strong>Camera:</strong> to take the challenge photo.</li>
-          <li><strong>Biometrics / Face ID:</strong> to verify your identity through the system.</li>
+          <li><strong>Camera:</strong> for the challenge photo and the pulse measurement.</li>
+          <li><strong>Microphone:</strong> only if you enable sleep tracking.</li>
           <li><strong>Notifications and exact alarms:</strong> so the alarm rings at the chosen time, including after a phone restart.</li>
-          <li><strong>Device audio:</strong> only if you choose your own sound file as a ringtone.</li>
-          <li><strong>Background, vibration and screen wake:</strong> to keep the alarm ringing.</li>
+          <li><strong>Biometrics / Face ID:</strong> to verify your identity through the system.</li>
+          <li><strong>Audio file access:</strong> only if you choose your own sound as a ringtone. Nap-less does not access your photos or videos.</li>
+          <li><strong>Foreground service, vibration and screen wake:</strong> to keep the alarm and sleep tracking running.</li>
+          <li><strong>Ignoring battery optimizations:</strong> so the system does not stop the alarm or the recording.</li>
+          <li><strong>Internet:</strong> for crash reports, update checks and the donation link.</li>
         </ul>
       </section>
 
       <section>
-        <h2>Storage and accounts</h2>
+        <h2>Third-party services</h2>
         <p>
-          You do not need to create an account. Your alarms and preferences (language, theme and
-          text size) are stored locally on your device, and security settings are stored using the
-          system's secure storage. Nap-less does not upload photos or biometric data to servers.
+          Nap-less does not sell or share data with advertisers. These services may process
+          technical data under their own policies:
         </p>
+        <ul>
+          <li><strong>Firebase Crashlytics (Google):</strong> receives reports when the app crashes, together with the device model and OS version, the app version and an installation identifier. It does not include your recordings, diary or measurements.</li>
+          <li><strong>Expo / EAS Update:</strong> when checking for updates, it receives technical data such as your IP address, platform, app version and update channel.</li>
+          <li><strong>PayPal:</strong> if you tap the donation button, its website opens in your browser. Nap-less does not send it any of your data, but PayPal will process your IP address and payment details under its own policy.</li>
+        </ul>
       </section>
 
       <section>
         <h2>Ads and tracking</h2>
         <p>
-          Nap-less does not include advertising, advertising tracking or analytics tools inside
-          the app.
+          Nap-less does not include advertising or behavioural analytics, does not build advertising
+          profiles and does not track your activity in other apps or websites. The only diagnostic
+          component is the crash reporting service described above.
+        </p>
+      </section>
+
+      <section>
+        <h2>Data retention</h2>
+        <p>
+          Audio recordings are deleted automatically after 24 hours. All other local data (account,
+          alarms, settings, diary, events and measurements) stays on the device until you delete it
+          from the app or uninstall Nap-less.
         </p>
       </section>
 
       <section>
         <h2>How to delete your data</h2>
         <p>
-          You can remove the biometrics setup from the app. To also delete your local alarms and
-          settings, clear Nap-less data from your device or uninstall the app.
+          You can delete individual recordings from the sleep screen and remove the biometrics setup
+          from the app. To delete the account and all local data, clear Nap-less data from your
+          device settings or uninstall the app.
+        </p>
+        <p>
+          If you need help deleting your data, write to
+          <a href="mailto:ACAP1.0@OUTLOOK.COM">ACAP1.0@OUTLOOK.COM</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Your rights</h2>
+        <p>
+          Because data is stored on your device, you can exercise access, rectification, erasure and
+          portability directly from the app or by deleting its data. If you live in the European
+          Economic Area, the United Kingdom or California, you can also contact us with any privacy
+          question or complaint.
+        </p>
+        <p>
+          Nap-less does not sell or share personal data for advertising purposes.
+        </p>
+      </section>
+
+      <section>
+        <h2>Children</h2>
+        <p>
+          Nap-less is not directed to children under 13 and does not knowingly collect data from
+          children. If you believe a child's data has been stored, contact us so we can delete it.
+        </p>
+      </section>
+
+      <section>
+        <h2>Changes to this policy</h2>
+        <p>
+          If the app's features or the services it uses change, we will update this page and the
+          last-updated date. Significant changes will be announced inside the app.
         </p>
       </section>
 
